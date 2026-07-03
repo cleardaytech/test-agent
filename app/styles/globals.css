@@ -28,3 +28,14 @@ body {
     text-wrap: balance;
   }
 }
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(59, 130, 246, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+.agent-speaking-pulse {
+  animation: pulse-ring 1.5s infinite;
+  border-radius: 50%;
+}
