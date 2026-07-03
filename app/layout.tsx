@@ -29,9 +29,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ margin: 0, padding: 0, fontFamily: 'var(--font-geist-sans)' }}
       >
-        <header style={{ padding: '20px', backgroundColor: '#f8f9fa', textAlign: 'center', borderBottom: '1px solid #dee2e6' }}>
-          <h1 style={{ margin: 0 }}>Retell AI Frontend Demo</h1>
-        </header>
         <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 60px)', padding: '20px' }}>
           {children}
         </main>
