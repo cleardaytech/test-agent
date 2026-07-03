@@ -124,14 +124,14 @@ export default function VoiceAgentPage() {
         {/* STATE 1: THE FORM */}
         {appState === "form" && (
           <form onSubmit={handleStartCall} className="flex flex-col gap-4">
-            <h2 className="text-xl font-semibold mb-2">Let's get started</h2>
+            <h2 className="text-xl text-gray-900 font-semibold mb-2">Let's get started</h2>
             <input 
               type="text" 
               placeholder="Your Name" 
               required
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
             />
             <input 
               type="email" 
@@ -139,7 +139,7 @@ export default function VoiceAgentPage() {
               required
               value={userEmail}
               onChange={(e) => setUserEmail(e.target.value)}
-              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
             />
             <button type="submit" className="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition">
               Start Conversation
