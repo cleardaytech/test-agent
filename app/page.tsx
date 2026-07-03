@@ -1,13 +1,13 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
 import { RetellWebClient } from "retell-client-js-sdk";
 
 // Initialize the Retell Client outside the component
 const webClient = new RetellWebClient();
 
 export default function VoiceAgentPage() {
-  // Application States
-  const [appState, setAppState] = useState("form"); // form, connecting, active, ended
+  // Application States (with TS labels)
+  const [appState, setAppState] = useState<"form" | "connecting" | "active" | "ended">("form");
   const [isAgentSpeaking, setIsAgentSpeaking] = useState(false);
   const [callDuration, setCallDuration] = useState(0);
   
@@ -26,7 +26,6 @@ export default function VoiceAgentPage() {
       setIsAgentSpeaking(false);
     });
 
-    // These trigger the visual pulse effect
     webClient.on("agent_start_talking", () => setIsAgentSpeaking(true));
     webClient.on("agent_stop_talking", () => setIsAgentSpeaking(false));
 
@@ -38,9 +37,9 @@ export default function VoiceAgentPage() {
     };
   }, []);
 
-  // Timer logic for the active call
+  // Timer logic for the active call (Fixed TS Error)
   useEffect(() => {
-    let timer;
+    let timer: ReturnType<typeof setInterval>;
     if (appState === "active") {
       timer = setInterval(() => {
         setCallDuration((prev) => prev + 1);
@@ -49,19 +48,19 @@ export default function VoiceAgentPage() {
     return () => clearInterval(timer);
   }, [appState]);
 
-  // Format timer to MM:SS
-  const formatTime = (seconds) => {
+  // Format timer to MM:SS (Fixed TS Error)
+  const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60).toString().padStart(2, '0');
     const s = (seconds % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
   };
 
-  const handleStartCall = async (e) => {
+  // Handle Form Submission (Fixed TS Error)
+  const handleStartCall = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setAppState("connecting");
 
     try {
-      // 1. Send form data to your backend
       const response = await fetch("/api/register-call", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -71,7 +70,6 @@ export default function VoiceAgentPage() {
       const data = await response.json();
       
       if (data.access_token) {
-        // 2. Start the call using the returned token
         await webClient.startCall({
           accessToken: data.access_token,
         });
